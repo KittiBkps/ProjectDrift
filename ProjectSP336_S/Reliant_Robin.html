@@ -1,0 +1,227 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Game</title>
+  <link rel="icon" href="src/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+  <style>
+    body { margin: 0; }
+
+    /* center on top */
+    #instructions {
+      position: absolute;
+      top: 10;
+
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      color: #ffffff;
+      text-align: center;
+    }
+/* GameStart และตัวนับถอยหลัง */
+#gameStartOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    #gameStartOverlay h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 4rem;
+      margin: 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #gameStartOverlay span {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 6rem;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ffd700;
+      animation: pulse 1s infinite;
+    }
+
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    #controls {
+    position: fixed;
+    bottom: 10px; /* จัดให้อยู่ชิดด้านล่าง */
+    right: 10px; /* ชิดขวา */
+    z-index: 1000;
+    display: flex; /* ใช้ flexbox สำหรับเรียงปุ่ม */
+    flex-direction: row; /* จัดเรียงปุ่มในแนวนอน */
+    gap: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+}
+ 
+/* index button */
+#indexButton {
+    padding: 10px 10px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #b2edff;
+    border: none;
+    border: 4px solid #000000;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px #0000001a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 5px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+ 
+#indexButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px #00000033;
+    background-color: #77b6fe;
+}
+ 
+#indexButton:active {
+    transform: scale(1);
+    box-shadow: 0 2px 4px #0000001a;
+    background-color: #77b6fe;
+}
+ 
+ 
+  /* เพิ่ม home button ไปหน้าเลือกรถ */
+  #homeButton {
+    padding: 10px 10px;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #ffc9fb;
+    border: none;
+    border: 4px solid #000000;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px #0000001a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 5px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+ 
+#homeButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px #00000033;
+    background-color: #fb85ff;
+}
+ 
+#homeButton:active {
+    transform: scale(1);
+    box-shadow: 0 2px 4px #0000001a;
+    background-color: #fb85ff;
+}
+ 
+  /* เพิ่มปุ่มรีเฟรชเกม */
+#refreshButton {
+  padding: 10px 18px;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #ffea00;
+  border: none;
+  border: 4px solid #000000;
+  border-radius: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px #0000001a;
+  display: flex; /* เพื่อจัดเรียงไอคอนกับข้อความ */
+  align-items: center;
+  gap: 8px; /* ระยะห่างระหว่างไอคอนกับข้อความ */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+ 
+#refreshButton:hover {
+  transform: scale(1.1); /* ขยายขนาด */
+  box-shadow: 0 6px 12px #00000033; /* เพิ่มเงา */
+  background-color: #ffbb00; /* เปลี่ยนสีเมื่อ hover */
+}
+ 
+#refreshButton:active {
+  transform: scale(1); /* กลับไปขนาดปกติเมื่อคลิก */
+  box-shadow: 0 2px 4px #0000001a;
+  background-color: #ffbb00; /* สีเข้มขึ้นเมื่อคลิก */
+}
+  </style>
+</head>
+<body>
+  <!-- ตัวนับถอยหลัง -->
+  <div id="gameStartOverlay">
+    <h1>Game Start</h1>
+    <span id="countdown">5</span>
+  </div>
+
+  <div id="instructions">
+    (W,A,S,D = Move,F5 = reset, G = Reset Camera Options)
+  </div>
+
+
+  <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./threejs/build/three.module.js",
+        "cannon-es": "./cannonjs/cannon-es.js"
+      }
+    }
+  </script>
+
+  <div id="threejs"> </div>
+  <script src="./src/js/Reliant_Robin.js" type="module"></script>
+
+  <div id="controls">
+    <button id="homeButton"><span id="homeIcon"><i class="fa fa-home"></i> Home</span></button>
+ 
+    <button id="indexButton"><span id="indexIcon"><i class="fa fa-car"></i> Car</span></button>
+ 
+    <button id="refreshButton"><span id="refreshIcon"><i class="fa fa-refresh"></i> Refresh Game</span></button>
+  </div>
+
+  <script>
+    // นับถอยหลัง
+    const countdownElement = document.getElementById('countdown');
+    let countdown = 5;
+
+    const countdownInterval = setInterval(() => {
+      countdown -= 1;
+      countdownElement.textContent = countdown;
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('gameStartOverlay').style.display = 'none';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
