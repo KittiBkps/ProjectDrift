@@ -1,8 +1,8 @@
 ขั้นตอนการใช้งาน 
 
 1. นำ folder ProjectSP336_S เข้าสู่ C:\xampp\htdocs
-2. เปิด XAMPP หรือ Localserver
-3. เปิด folder ProjectSP336_S เลือก Home.html
+2. เปิด XAMPP start Apache
+3. เปิด folder ProjectSP336_S เลือกเปิด Home.html
 4. ในหน้า Home.htlm เลือก Play จากนั้นสามารถเลือกรถที่ต้องการจะเล่น
 
 การเล่นสามารถใช่ 
